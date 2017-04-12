@@ -1,6 +1,5 @@
 package Entidades;
 
-import java.awt.Event;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,8 +8,12 @@ public class Principal {
 	private static ArrayList<Empleado> ListadeEmpleados;
 	public static void main(String[] args) {
 		ListadeEmpleados = new ArrayList<>();
-		cargarempleado();
+		for (int i = 0; i < 2; i++) {
+			cargarempleado();
+		}
 		mostarsueldo();
+		
+		
 	}
 		
 	private static void cargarempleado() {
@@ -25,16 +28,20 @@ public class Principal {
 		System.out.println("Ingrese Email");
 		String email = lectura.nextLine();
 		System.out.println("Ingrese sueldoBase");
-		double sueldoBase = lectura.nextDouble();
+		String lecsueldoBase = lectura.nextLine();
+		double sueldoBase =  Double.parseDouble(lecsueldoBase);
 		
 		System.out.println("El Empleado es Administrador? 1=SI/2=NO");
-		String RespuestaAdministrador = lectura.nextLine();
+		String lecRespuestaAdministrador = lectura.nextLine();
+		int R = Integer.parseInt(lecRespuestaAdministrador);
 		
-		if (RespuestaAdministrador == "1") {
+		if (R == 1) {
 			System.out.println("Ingrese hsExtra");
-			double hsExtra = lectura.nextDouble();
+			String lechsExtra = lectura.nextLine();
+			double hsExtra =  Double.parseDouble(lechsExtra);
 			System.out.println("Ingrese hsMes");
-			double hsMes = lectura.nextDouble();
+			String lechsMes = lectura.nextLine();
+			double hsMes =  Double.parseDouble(lechsMes);
 			ListadeEmpleados.add(new Administrativo (dni,nombre,apellido,email,sueldoBase,hsExtra,hsMes));
 		}else {
 			System.out.println("Ingrese porcenComision");
@@ -43,12 +50,11 @@ public class Principal {
 			System.out.println("Ingrese totalVentas");
 			String lectotalVentas = lectura.nextLine();
 			double totalVentas = Double.parseDouble(lectotalVentas);
-			ListadeEmpleados.add(new Administrativo (dni,nombre,apellido,email,sueldoBase,porcenComision,totalVentas));
+			ListadeEmpleados.add(new Vendedor (dni,nombre,apellido,email,sueldoBase,porcenComision,totalVentas));
 		}
 		
-		lectura.close();
 	}
-
+	
 	private static void mostarsueldo() {
 		double sueldo;
 		Scanner lectura = new Scanner (System.in);
